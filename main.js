@@ -37,9 +37,10 @@ class BasicCharacterController {
 
   _LoadModels() {
     const loader = new FBXLoader();
-    loader.setPath('./resources/zombie/');
-    loader.load('mremireh_o_desbiens.fbx', (fbx) => {
+    loader.setPath('./resources/character/');
+    loader.load('character.fbx', (fbx) => {
       fbx.scale.setScalar(0.1);
+      //fbx.scale.multiplyScalar(300);
       fbx.traverse(c => {
         c.castShadow = true;
       });
@@ -65,11 +66,15 @@ class BasicCharacterController {
       };
 
       const loader = new FBXLoader(this._manager);
-      loader.setPath('./resources/zombie/');
+      loader.setPath('./resources/character/');
       loader.load('walk.fbx', (a) => { _OnLoad('walk', a); });
       loader.load('run.fbx', (a) => { _OnLoad('run', a); });
       loader.load('idle.fbx', (a) => { _OnLoad('idle', a); });
+// <<<<<<< HEAD
       loader.load('hiphop.fbx', (a) => { _OnLoad('dance', a); });
+// =======
+      loader.load('jump.fbx', (a) => { _OnLoad('jump', a); });
+// >>>>>>> a7de886aa4f487b7c5451a449c4929326517efd1
     });
   }
 
@@ -113,7 +118,7 @@ class BasicCharacterController {
       acc.multiplyScalar(2.0);
     }
 
-    if (this._stateMachine._currentState.Name == 'dance') {
+    if (this._stateMachine._currentState.Name == 'jump') {
       acc.multiplyScalar(0.0);
     }
 
@@ -272,7 +277,7 @@ class CharacterFSM extends FiniteStateMachine {
     this._AddState('idle', IdleState);
     this._AddState('walk', WalkState);
     this._AddState('run', RunState);
-    this._AddState('dance', DanceState);
+    this._AddState('jump', JumpState);
   }
 };
 
@@ -288,7 +293,7 @@ class State {
 };
 
 
-class DanceState extends State {
+class JumpState extends State {
   constructor(parent) {
     super(parent);
 
@@ -298,11 +303,11 @@ class DanceState extends State {
   }
 
   get Name() {
-    return 'dance';
+    return 'jump';
   }
 
   Enter(prevState) {
-    const curAction = this._parent._proxy._animations['dance'].action;
+    const curAction = this._parent._proxy._animations['jump'].action;
     const mixer = curAction.getMixer();
     mixer.addEventListener('finished', this._FinishedCallback);
 
@@ -325,7 +330,7 @@ class DanceState extends State {
   }
 
   _Cleanup() {
-    const action = this._parent._proxy._animations['dance'].action;
+    const action = this._parent._proxy._animations['jump'].action;
     
     action.getMixer().removeEventListener('finished', this._CleanupCallback);
   }
@@ -466,7 +471,7 @@ class IdleState extends State {
     if (input._keys.forward || input._keys.backward) {
       this._parent.SetState('walk');
     } else if (input._keys.space) {
-      this._parent.SetState('dance');
+      this._parent.SetState('jump');
     }
   }
 };
