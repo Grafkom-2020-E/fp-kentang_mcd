@@ -14,7 +14,6 @@ class BasicCharacterControllerProxy {
   }
 };
 
-
 class BasicCharacterController {
   constructor(params) {
     this._Init(params);
@@ -40,7 +39,7 @@ class BasicCharacterController {
     loader.setPath('./resources/character/');
     loader.load('character.fbx', (fbx) => {
       fbx.scale.setScalar(0.1);
-      //fbx.scale.multiplyScalar(300);
+      // fbx.scale.multiplyScalar(1.5);
       fbx.traverse(c => {
         c.castShadow = true;
       });
@@ -70,13 +69,9 @@ class BasicCharacterController {
       loader.load('walk.fbx', (a) => { _OnLoad('walk', a); });
       loader.load('run.fbx', (a) => { _OnLoad('run', a); });
       loader.load('idle.fbx', (a) => { _OnLoad('idle', a); });
-// <<<<<<< HEAD
-      loader.load('hiphop.fbx', (a) => { _OnLoad('dance', a); });
-// =======
       loader.load('jump.fbx', (a) => { _OnLoad('jump', a); });
-// >>>>>>> a7de886aa4f487b7c5451a449c4929326517efd1
     });
-  }
+  }  
 
   get Position() {
     return this._position;
@@ -115,7 +110,7 @@ class BasicCharacterController {
 
     const acc = this._acceleration.clone();
     if (this._input._keys.shift) {
-      acc.multiplyScalar(2.0);
+      acc.multiplyScalar(4.0);
     }
 
     if (this._stateMachine._currentState.Name == 'jump') {
@@ -593,6 +588,18 @@ class ThirdPersonCameraDemo {
     plane.rotation.x = -Math.PI / 2;
     this._scene.add(plane);
 
+    const loader2 = new FBXLoader();
+    loader2.setPath('./resources/landmark/');
+    loader2.load('monas.fbx', (fbx) => {
+      fbx.scale.setScalar(0.1);
+      // fbx.scale.multiplyScalar(0.5);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(1280, 0, 80); //Position disini
+      this._scene.add(fbx);
+    });
+    
     this._mixers = [];
     this._previousRAF = null;
 
@@ -676,3 +683,6 @@ _TestLerp(0.01, 0.01);
 _TestLerp(1.0 / 100.0, 1.0 / 50.0);
 _TestLerp(1.0 - Math.pow(0.3, 1.0 / 100.0), 
           1.0 - Math.pow(0.3, 1.0 / 50.0));
+
+
+  
