@@ -574,11 +574,15 @@ class ThirdPersonCameraDemo {
     texture.encoding = THREE.sRGBEncoding;
     this._scene.background = texture;
 
-    const plane = new THREE.Mesh(
-        new THREE.PlaneGeometry(2000, 2000, 10, 10),
-        new THREE.MeshStandardMaterial({
-            color: 0x808080,
-          }));
+    var img = new THREE.MeshBasicMaterial({ //CHANGED to MeshBasicMaterial
+      map:THREE.ImageUtils.loadTexture('resources/Earth.png')
+    });
+    img.map.needsUpdate = true; //ADDED
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(2000, 2000, 50, 50),img);
+    // new THREE.MeshStandardMaterial({
+    //   color: 0x808080,
+    // }));
+    plane.overdraw = true;
     plane.castShadow = false;
     plane.receiveShadow = true;
     plane.rotation.x = -Math.PI / 2;
