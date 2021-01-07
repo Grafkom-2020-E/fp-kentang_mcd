@@ -25,7 +25,7 @@ class BasicCharacterController {
     this._decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
     this._acceleration = new THREE.Vector3(1, 0.25, 50.0);
     this._velocity = new THREE.Vector3(0, 0, 0);
-    this._position = new THREE.Vector3();
+    this._position = new THREE.Vector3(0, 0, 0);
 
     this._animations = {};
     this._input = new BasicCharacterControllerInput();
@@ -69,7 +69,7 @@ class BasicCharacterController {
       loader.load('walk.fbx', (a) => { _OnLoad('walk', a); });
       loader.load('run.fbx', (a) => { _OnLoad('run', a); });
       loader.load('idle.fbx', (a) => { _OnLoad('idle', a); });
-      loader.load('dance.fbx', (a) => { _OnLoad('dance', a); });
+      loader.load('hiphop.fbx', (a) => { _OnLoad('dance', a); });
     });
   }
 
@@ -136,7 +136,7 @@ class BasicCharacterController {
 
     controlObject.quaternion.copy(_R);
 
-    const oldPosition = new THREE.Vector3();
+    const oldPosition = new THREE.Vector3(0,0,0);
     oldPosition.copy(controlObject.position);
 
     const forward = new THREE.Vector3(0, 0, 1);
@@ -482,7 +482,7 @@ class ThirdPersonCamera {
   }
 
   _CalculateIdealOffset() {
-    const idealOffset = new THREE.Vector3(-15, 20, -30);
+    const idealOffset = new THREE.Vector3(0, 25, -50);
     idealOffset.applyQuaternion(this._params.target.Rotation);
     idealOffset.add(this._params.target.Position);
     return idealOffset;
@@ -578,7 +578,7 @@ class ThirdPersonCameraDemo {
       map:THREE.ImageUtils.loadTexture('resources/Earth.png')
     });
     img.map.needsUpdate = true; //ADDED
-    const plane = new THREE.Mesh(new THREE.PlaneGeometry(2000, 2000, 50, 50),img);
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(4096, 2048, 50, 50),img);
     // new THREE.MeshStandardMaterial({
     //   color: 0x808080,
     // }));
