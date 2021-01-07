@@ -564,18 +564,18 @@ class ThirdPersonCameraDemo {
 
     const loader = new THREE.CubeTextureLoader();
     const texture = loader.load([
-        './resources/posx.jpg',
-        './resources/negx.jpg',
-        './resources/posy.jpg',
-        './resources/negy.jpg',
-        './resources/posz.jpg',
-        './resources/negz.jpg',
+        './resources/sky/posx.bmp',
+        './resources/sky/negx.bmp',
+        './resources/sky/posy.bmp',
+        './resources/sky/negy.bmp',
+        './resources/sky/posz.bmp',
+        './resources/sky/negz.bmp',
     ]);
     texture.encoding = THREE.sRGBEncoding;
     this._scene.background = texture;
 
     const plane = new THREE.Mesh(
-        new THREE.PlaneGeometry(100, 100, 10, 10),
+        new THREE.PlaneGeometry(2000, 2000, 10, 10),
         new THREE.MeshStandardMaterial({
             color: 0x808080,
           }));
