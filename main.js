@@ -67,7 +67,9 @@ class BasicCharacterController {
       const loader = new FBXLoader(this._manager);
       loader.setPath('./resources/character/');
       loader.load('walk.fbx', (a) => { _OnLoad('walk', a); });
+      loader.load('Backwards.fbx', (a) => { _OnLoad('backward', a); });
       loader.load('run.fbx', (a) => { _OnLoad('run', a); });
+      loader.load('runbackward.fbx', (a) => { _OnLoad('runbackward', a); });
       loader.load('idle.fbx', (a) => { _OnLoad('idle', a); });
       loader.load('jump.fbx', (a) => { _OnLoad('jump', a); });
     });
@@ -271,7 +273,9 @@ class CharacterFSM extends FiniteStateMachine {
   _Init() {
     this._AddState('idle', IdleState);
     this._AddState('walk', WalkState);
+    this._AddState('backward', backwardState);
     this._AddState('run', RunState);
+    this._AddState('runbackward', RunbackState);
     this._AddState('jump', JumpState);
   }
 };
@@ -375,9 +379,56 @@ class WalkState extends State {
   }
 
   Update(timeElapsed, input) {
-    if (input._keys.forward || input._keys.backward) {
+    if (input._keys.forward) {
       if (input._keys.shift) {
         this._parent.SetState('run');
+      }
+      return;
+    }
+
+    this._parent.SetState('idle');
+  }
+};
+
+class backwardState extends State {
+  constructor(parent) {
+    super(parent);
+  }
+
+  get Name() {
+    return 'backward';
+  }
+
+  Enter(prevState) {
+    const curAction = this._parent._proxy._animations['backward'].action;
+    if (prevState) {
+      const prevAction = this._parent._proxy._animations[prevState.Name].action;
+
+      curAction.enabled = true;
+
+      if (prevState.Name == 'runbackward') {
+        const ratio = curAction.getClip().duration / prevAction.getClip().duration;
+        curAction.time = prevAction.time * ratio;
+      } else {
+        curAction.time = 0.0;
+        curAction.setEffectiveTimeScale(1.0);
+        curAction.setEffectiveWeight(1.0);
+      }
+
+      curAction.crossFadeFrom(prevAction, 0.5, true);
+      curAction.play();
+    } else {
+      curAction.play();
+    }
+  }
+
+  Exit() {
+  }
+
+  Update(timeElapsed, input) {
+    if (input._keys.backward){
+      if (input._keys.shift) {
+        this._parent.SetState('runbackward');
       }
       return;
     }
@@ -423,17 +474,61 @@ class RunState extends State {
   }
 
   Update(timeElapsed, input) {
-    if (input._keys.forward || input._keys.backward) {
+    if (input._keys.forward) {
       if (!input._keys.shift) {
         this._parent.SetState('walk');
       }
       return;
     }
-
     this._parent.SetState('idle');
   }
 };
 
+class RunbackState extends State {
+  constructor(parent) {
+    super(parent);
+  }
+
+  get Name() {
+    return 'runbackward';
+  }
+
+  Enter(prevState) {
+    const curAction = this._parent._proxy._animations['runbackward'].action;
+    if (prevState) {
+      const prevAction = this._parent._proxy._animations[prevState.Name].action;
+
+      curAction.enabled = true;
+
+      if (prevState.Name == 'backward') {
+        const ratio = curAction.getClip().duration / prevAction.getClip().duration;
+        curAction.time = prevAction.time * ratio;
+      } else {
+        curAction.time = 0.0;
+        curAction.setEffectiveTimeScale(1.0);
+        curAction.setEffectiveWeight(1.0);
+      }
+
+      curAction.crossFadeFrom(prevAction, 0.5, true);
+      curAction.play();
+    } else {
+      curAction.play();
+    }
+  }
+
+  Exit() {
+  }
+
+  Update(timeElapsed, input) {
+    if (input._keys.backward) {
+      if (!input._keys.shift) {
+        this._parent.SetState('backward');
+      }
+      return;
+    }
+    this._parent.SetState('idle');
+  }
+};
 
 class IdleState extends State {
   constructor(parent) {
@@ -463,9 +558,13 @@ class IdleState extends State {
   }
 
   Update(_, input) {
-    if (input._keys.forward || input._keys.backward) {
+    if (input._keys.forward) {
       this._parent.SetState('walk');
-    } else if (input._keys.space) {
+    } 
+    else if (input._keys.backward){
+      this._parent.SetState('backward');
+    }
+    else if (input._keys.space) {
       this._parent.SetState('jump');
     }
   }
@@ -597,6 +696,30 @@ class ThirdPersonCameraDemo {
         c.castShadow = true;
       });
       fbx.position.set(1280, 0, 80); //Position disini
+      this._scene.add(fbx);
+    });
+
+    const loader3 = new FBXLoader();
+    loader3.setPath('./resources/landmark/');
+    loader3.load('kaaba.fbx', (fbx) => {
+      fbx.scale.setScalar(1.0);
+      fbx.scale.multiplyScalar(100.0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(375, 20, -240); //Position disini
+      this._scene.add(fbx);
+    });
+
+    const loader4 = new FBXLoader();
+    loader4.setPath('./resources/landmark/');
+    loader4.load('burj.fbx', (fbx) => {
+      fbx.scale.setScalar(2.0);
+      //fbx.scale.multiplyScalar(0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(720, 0, -450); //Position disini
       this._scene.add(fbx);
     });
     
