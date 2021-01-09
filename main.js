@@ -611,6 +611,18 @@ class ThirdPersonCameraDemo {
       fbx.position.set(375, 20, -240); //Position disini
       this._scene.add(fbx);
     });
+
+    const loader4 = new FBXLoader();
+    loader4.setPath('./resources/landmark/');
+    loader4.load('burj.fbx', (fbx) => {
+      fbx.scale.setScalar(2.0);
+      //fbx.scale.multiplyScalar(0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(720, 0, -450); //Position disini
+      this._scene.add(fbx);
+    });
     
     this._mixers = [];
     this._previousRAF = null;
