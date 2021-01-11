@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Three.JS Tutorial: Third Person Camera</title>
-  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="base.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+
+.bg{
+    background-image: url('resources/menu/Image/bg-img.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.zoom {
+  transition: transform .2s;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.05); /* IE 9 */
+  -webkit-transform: scale(1.05); /* Safari 3-8 */
+  transform: scale(1.05); 
+}
+</style>
 </head>
-<body>
-  <script src="./main.js" type="module">
-  </script>
+<body class="bg">
+    <audio autoplay loop>
+        <source src="resources/menu/Audio/backsound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+<div class="text-center">
+    <img src="resources/menu/Image/Title.png" style="width: 600px;" class="mt-5">
+</div>
+<div class="text-center mt-5 zoom">
+    <a href="game.html">
+        <img src="resources/menu/Image/button1.png" style="width: 350px;" class="mt-5">
+    </a>
+    
+</div>
+<div class="text-center zoom">
+    <img src="resources/menu/Image/button2.png" style="width: 350px;" class="mt-2">
+</div>
+<div class="text-center zoom">
+    <img src="resources/menu/Image/button3.png" style="width: 350px;" class="mt-2">
+</div>
+</div>
 </body>
 </html>
