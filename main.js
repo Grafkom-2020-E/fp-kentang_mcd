@@ -722,7 +722,19 @@ class ThirdPersonCameraDemo {
       fbx.position.set(720, 0, -450); //Position disini
       this._scene.add(fbx);
     });
-    
+
+    const loader5 = new FBXLoader();
+    loader5.setPath('./resources/landmark/');
+    loader5.load('torii.fbx', (fbx) => {
+      fbx.scale.setScalar(1.0);
+      //fbx.scale.multiplyScalar(100.0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(1495, 0, -80); //Position disini
+      this._scene.add(fbx);
+    });
+
     this._mixers = [];
     this._previousRAF = null;
 
