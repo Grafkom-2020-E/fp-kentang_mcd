@@ -725,13 +725,13 @@ class ThirdPersonCameraDemo {
 
     const loader5 = new FBXLoader();
     loader5.setPath('./resources/landmark/');
-    loader5.load('torii.fbx', (fbx) => {
-      fbx.scale.setScalar(1.0);
+    loader5.load('toriigate.fbx', (fbx) => {
+      fbx.scale.setScalar(0.05);
       //fbx.scale.multiplyScalar(100.0);
       fbx.traverse(c => {
         c.castShadow = true;
       });
-      fbx.position.set(1495, 0, -80); //Position disini
+      fbx.position.set(1638, 0, 40); //Position disini
       this._scene.add(fbx);
     });
 
