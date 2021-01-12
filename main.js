@@ -731,7 +731,7 @@ class ThirdPersonCameraDemo {
       fbx.traverse(c => {
         c.castShadow = true;
       });
-      fbx.position.set(1638, 0, 40); //Position disini
+      fbx.position.set(1560, 0, -410); //Position disini
       this._scene.add(fbx);
     });
 
