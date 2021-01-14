@@ -749,6 +749,26 @@ class ThirdPersonCameraDemo {
       this._scene.add(fbx);
     });
 
+    loader2.load('igloo.fbx', (fbx) => {
+      fbx.scale.setScalar(1.0);
+      fbx.scale.multiplyScalar(100.0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(0, 15, 880); //Position disini
+      this._scene.add(fbx);
+    });
+
+    loader2.load('igloo.fbx', (fbx) => {
+      fbx.scale.setScalar(1.0);
+      fbx.scale.multiplyScalar(100.0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(100, 15, 880); //Position disini
+      this._scene.add(fbx);
+    });
+
     this._mixers = [];
     this._previousRAF = null;
 
