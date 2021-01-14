@@ -699,9 +699,7 @@ class ThirdPersonCameraDemo {
       this._scene.add(fbx);
     });
 
-    const loader3 = new FBXLoader();
-    loader3.setPath('./resources/landmark/');
-    loader3.load('kaaba.fbx', (fbx) => {
+    loader2.load('kaaba.fbx', (fbx) => {
       fbx.scale.setScalar(1.0);
       fbx.scale.multiplyScalar(100.0);
       fbx.traverse(c => {
@@ -710,10 +708,8 @@ class ThirdPersonCameraDemo {
       fbx.position.set(375, 20, -240); //Position disini
       this._scene.add(fbx);
     });
-
-    const loader4 = new FBXLoader();
-    loader4.setPath('./resources/landmark/');
-    loader4.load('burj.fbx', (fbx) => {
+    
+    loader2.load('burj.fbx', (fbx) => {
       fbx.scale.setScalar(2.0);
       //fbx.scale.multiplyScalar(0);
       fbx.traverse(c => {
@@ -723,15 +719,23 @@ class ThirdPersonCameraDemo {
       this._scene.add(fbx);
     });
 
-    const loader5 = new FBXLoader();
-    loader5.setPath('./resources/landmark/');
-    loader5.load('toriigate.fbx', (fbx) => {
+    loader2.load('toriigate.fbx', (fbx) => {
       fbx.scale.setScalar(0.05);
       //fbx.scale.multiplyScalar(100.0);
       fbx.traverse(c => {
         c.castShadow = true;
       });
-      fbx.position.set(1560, 0, -410); //Position disini
+      fbx.position.set(1560, -3, -410); //Position disini
+      this._scene.add(fbx);
+    });
+
+    loader2.load('stonehenge.fbx', (fbx) => {
+      fbx.scale.setScalar(0.1);
+      //fbx.scale.multiplyScalar(100.0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(0, 0, -612); //Position disini
       this._scene.add(fbx);
     });
 
