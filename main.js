@@ -769,6 +769,26 @@ class ThirdPersonCameraDemo {
       this._scene.add(fbx);
     });
 
+    loader2.load('92853b5f975a4f08ab1a66e83557068a.fbx', (fbx) => {
+      fbx.scale.setScalar(1.0);
+      fbx.scale.multiplyScalar(10.0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(-542, 0, -467); //Position disini
+      this._scene.add(fbx);
+    });
+
+    loader2.load('iceberg2.fbx', (fbx) => {
+      fbx.scale.setScalar(1.0);
+      fbx.scale.multiplyScalar(8.0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(-560, -20, -480); //Position disini
+      this._scene.add(fbx);
+    });
+
     this._mixers = [];
     this._previousRAF = null;
 
