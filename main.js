@@ -112,7 +112,7 @@ class BasicCharacterController {
 
     const acc = this._acceleration.clone();
     if (this._input._keys.shift) {
-      acc.multiplyScalar(4.0);
+      acc.multiplyScalar(8.0);
     }
 
     if (this._stateMachine._currentState.Name == 'jump') {
@@ -771,7 +771,7 @@ class ThirdPersonCameraDemo {
 
     loader2.load('92853b5f975a4f08ab1a66e83557068a.fbx', (fbx) => {
       fbx.scale.setScalar(1.0);
-      fbx.scale.multiplyScalar(10.0);
+      fbx.scale.multiplyScalar(7.5);
       fbx.traverse(c => {
         c.castShadow = true;
       });
@@ -781,11 +781,31 @@ class ThirdPersonCameraDemo {
 
     loader2.load('iceberg2.fbx', (fbx) => {
       fbx.scale.setScalar(1.0);
-      fbx.scale.multiplyScalar(8.0);
+      fbx.scale.multiplyScalar(6.0);
       fbx.traverse(c => {
         c.castShadow = true;
       });
       fbx.position.set(-560, -20, -480); //Position disini
+      this._scene.add(fbx);
+    });
+
+    loader2.load('Plane SF export.fbx', (fbx) => {
+      fbx.scale.setScalar(1.0);
+      fbx.scale.multiplyScalar(1.0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(-774, 60, -570); //Position disini
+      this._scene.add(fbx);
+    });
+
+    loader2.load('wtc.fbx', (fbx) => {
+      fbx.scale.setScalar(1.0);
+      fbx.scale.multiplyScalar(0.02);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(-750, -8, -515); //Position disini
       this._scene.add(fbx);
     });
 
