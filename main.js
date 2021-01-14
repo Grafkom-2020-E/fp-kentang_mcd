@@ -674,7 +674,7 @@ class ThirdPersonCameraDemo {
     this._scene.background = texture;
 
     var img = new THREE.MeshBasicMaterial({ //CHANGED to MeshBasicMaterial
-      map:THREE.ImageUtils.loadTexture('resources/Earth.png')
+      map:THREE.ImageUtils.loadTexture('resources/4_no_ice_clouds_mts_16k.jpg')
     });
     img.map.needsUpdate = true; //ADDED
     const plane = new THREE.Mesh(new THREE.PlaneGeometry(4096, 2048, 50, 50),img);
