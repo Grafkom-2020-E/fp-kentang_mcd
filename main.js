@@ -779,9 +779,9 @@ class ThirdPersonCameraDemo {
       this._scene.add(fbx);
     });
 
-    loader2.load('iceberg2.fbx', (fbx) => {
+    loader2.load('iceberg3.fbx', (fbx) => {
       fbx.scale.setScalar(1.0);
-      fbx.scale.multiplyScalar(6.0);
+      fbx.scale.multiplyScalar(3.0);
       fbx.traverse(c => {
         c.castShadow = true;
       });
@@ -799,7 +799,7 @@ class ThirdPersonCameraDemo {
       this._scene.add(fbx);
     });
 
-    loader2.load('wtc.fbx', (fbx) => {
+    loader2.load('wtc2.fbx', (fbx) => {
       fbx.scale.setScalar(1.0);
       fbx.scale.multiplyScalar(0.02);
       fbx.traverse(c => {
@@ -808,6 +808,16 @@ class ThirdPersonCameraDemo {
       fbx.position.set(-750, -8, -515); //Position disini
       this._scene.add(fbx);
     });
+
+    // loader2.load('baloon low.fbx', (fbx) => {
+    //   fbx.scale.setScalar(1.0);
+    //   fbx.scale.multiplyScalar(1.0);
+    //   fbx.traverse(c => {
+    //     c.castShadow = true;
+    //   });
+    //   fbx.position.set(0, 50, 100); //Position disini
+    //   this._scene.add(fbx);
+    // });
 
     this._mixers = [];
     this._previousRAF = null;
