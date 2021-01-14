@@ -739,6 +739,16 @@ class ThirdPersonCameraDemo {
       this._scene.add(fbx);
     });
 
+    loader2.load('maya.fbx', (fbx) => {
+      fbx.scale.setScalar(1.0);
+      //fbx.scale.multiplyScalar(100.0);
+      fbx.traverse(c => {
+        c.castShadow = true;
+      });
+      fbx.position.set(-995, 35, -200); //Position disini
+      this._scene.add(fbx);
+    });
+
     this._mixers = [];
     this._previousRAF = null;
 
